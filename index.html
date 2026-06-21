@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Do You Like Me?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 3rem 4rem;
+      border-radius: 2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #e75480;
+      margin-bottom: 2.5rem;
+      font-weight: 700;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 3rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+      min-width: 120px;
+    }
+
+    .btn-yes {
+      background: #e75480;
+      color: white;
+      box-shadow: 0 6px 20px rgba(231, 84, 128, 0.4);
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.1);
+    }
+
+    .btn-no {
+      background: #555;
+      color: white;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      transition: left 0.3s ease, top 0.3s ease, transform 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Do you like me? 💖</h1>
+    <div class="buttons">
+      <button class="btn btn-yes" id="yesBtn">Yes 💕</button>
+      <button class="btn btn-no" id="noBtn">No</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const container = document.querySelector('.container');
+
+    noBtn.addEventListener('mouseenter', () => {
+      const containerRect = container.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width - 20;
+      const maxY = containerRect.height - btnRect.height - 20;
+
+      let newX = Math.random() * maxX;
+      let newY = Math.random() * maxY;
+
+      newX = Math.max(0, Math.min(newX, maxX));
+      newY = Math.max(0, Math.min(newY, maxY));
+
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = newX + 'px';
+      noBtn.style.top = newY + 'px';
+    });
+
+    yesBtn.addEventListener('click', () => {
+      document.body.innerHTML = `
+        <div style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          text-align: center;
+          background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          padding: 2rem;
+        ">
+          <h1 style="font-size: 3.5rem; color: #e75480; margin-bottom: 1rem;">
+            Yay! I like you too! 🎉💖
+          </h1>
+          <p style="font-size: 1.5rem; color: #666;">
+            You made my day! ❤️
+          </p>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
